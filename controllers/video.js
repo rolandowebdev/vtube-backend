@@ -74,7 +74,7 @@ export const addView = async (req, res, next) => {
 export const random = async (req, res, next) => {
   // TODO: aggregate object used for return random video
   try {
-    const videos = await Video.aggregate([{ $sample: { size: 1 } }]);
+    const videos = await Video.aggregate([{ $sample: { size: 40 } }]);
     res.status(200).json(videos);
   } catch (error) {
     next(error);
@@ -101,13 +101,36 @@ export const sub = async (req, res, next) => {
         return Video.find({ userId: channelId });
       })
     );
-
     /**
      * TODO: flat method for create new array
      * * flat method can handle nested array
      * * sort in this case sorting video from news video
      * */
     res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getByTag = async (req, res, next) => {
+  const tags = req.query.tags.split(',');
+  // TODO: get all specific tags from videos
+  try {
+    const videos = await Video.find({ tags: { $in: tags } }).limit(20);
+    res.status(200).json(videos);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const search = async (req, res, next) => {
+  const query = req.query.q;
+  // TODO: search based on title video and ignore upper & lowercase
+  try {
+    const videos = await Video.find({
+      title: { $regex: query, $options: 'i' }
+    }).limit(40);
+    res.status(200).json(videos);
   } catch (error) {
     next(error);
   }
