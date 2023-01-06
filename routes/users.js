@@ -2,12 +2,12 @@ import express from 'express';
 import { verifyToken } from '../verifyToken.js';
 import {
   deleteUser,
-  dislike,
   getUser,
-  like,
   subscribe,
   unsubscribe,
-  update
+  update,
+  dislike,
+  like
 } from '../controllers/user.js';
 
 const router = express.Router();
@@ -28,8 +28,9 @@ router.put('/sub/:id', verifyToken, subscribe);
 router.get('/unsub/:id', unsubscribe);
 
 // TODO: like a video
-router.get('/like/:videoId', like);
+router.put('/like/:videoId', verifyToken, like);
 
 // TODO: dislike a video
-router.get('/dislike/:videoId', dislike);
+router.put('/dislike/:videoId', verifyToken, dislike);
+
 export default router;
