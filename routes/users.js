@@ -22,7 +22,7 @@ router.delete('/:id', verifyToken, deleteUser);
 router.get('/find/:id', getUser);
 
 //  subscribe a user
-router.put('/sub/:id', subscribe);
+router.put('/sub/:id', verifyToken, subscribe);
 
 //  unsubscribe a user
 router.get('/unsub/:id', unsubscribe);
