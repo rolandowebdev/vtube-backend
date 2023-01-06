@@ -12,24 +12,24 @@ import {
 
 const router = express.Router();
 
-// update user
+// TODO: pdate user
 router.put('/:id', verifyToken, update);
 
-//  delete user
+// TODO: delete user
 router.delete('/:id', verifyToken, deleteUser);
 
-//  get a user
+// TODO: get a user
 router.get('/find/:id', getUser);
 
-//  subscribe a user
+// TODO: subscribe a user
 router.put('/sub/:id', verifyToken, subscribe);
 
-//  unsubscribe a user
+// TODO: unsubscribe a user
 router.get('/unsub/:id', unsubscribe);
 
-//  like a video
+// TODO: like a video
 router.get('/like/:videoId', like);
 
-//  dislike a video
+// TODO: dislike a video
 router.get('/dislike/:videoId', dislike);
 export default router;
