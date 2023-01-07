@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 // routes
 import userRoutes from './routes/users.js';
@@ -29,6 +30,14 @@ app.use(cookieParser());
 
 // parsing data to json
 app.use(express.json());
+
+// handle cors
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  })
+);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
