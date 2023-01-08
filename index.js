@@ -16,7 +16,7 @@ dotenv.config(); // for use .env file
 const connect = () => {
   mongoose
     .set('strictQuery', false)
-    .connect(process.env.MONGO_CONNECTION)
+    .connect(process.env.MONGODB_CONNECTION)
     .then(() => {
       console.log('Connect to MongoDB!');
     })
